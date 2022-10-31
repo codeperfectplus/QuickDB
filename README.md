@@ -23,11 +23,6 @@ You can install python-db using pip:
 
     pip install python-db
 
-or you can install it from source:
-
-    git clone
-    cd python-db
-    python setup.py install
 
 ## Usage
 

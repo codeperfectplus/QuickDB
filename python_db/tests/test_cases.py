@@ -2,7 +2,7 @@ import sys
 sys.path.append('.')
 import unittest
 
-from src.main import Database
+from python_db.main import Database
 
 db = Database("test_db.json", overwrite_db=True)
 
