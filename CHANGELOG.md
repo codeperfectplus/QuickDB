@@ -4,4 +4,7 @@ All notable changes to this project will be documented in this file. The format 
 
 ## [Initial Release]
 
-- Initial release with basic database features
+- Initial release with basic database features++
+- Initial documentation++
+- Initial tests++
+- 
