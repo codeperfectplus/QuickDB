@@ -12,7 +12,7 @@ def print_it(color, text):
     elif color == 'blue':
         print(Fore.BLUE + text + Style.RESET_ALL)
 
-class Database(object):
+class QuickDB(object):
     """  python database.py """
     def __init__(self, db_path, overwrite_db=False):
         self.db_path = db_path

@@ -2,9 +2,9 @@ import sys
 sys.path.append('.')
 import unittest
 
-from python_db.main import Database
+from quickdb.main import QuickDB
 
-db = Database("test_db.json", overwrite_db=True)
+db = QuickDB("test_db.json", overwrite_db=True)
 
 class DatabaseTest(unittest.TestCase):
     
