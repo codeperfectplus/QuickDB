@@ -1,8 +1,8 @@
 import os
 import json
-import re
 
 from colorama import Fore, Style
+
 
 def print_it(color, text):
     if color == "red":
@@ -11,6 +11,7 @@ def print_it(color, text):
         print(Fore.GREEN + text + Style.RESET_ALL)
     elif color == 'blue':
         print(Fore.BLUE + text + Style.RESET_ALL)
+
 
 class QuickDB(object):
     """  python database.py """

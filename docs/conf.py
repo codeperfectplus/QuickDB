@@ -1,6 +1,6 @@
 from datetime import datetime
 
-project = 'python-db'
+project = 'quickDB'
 release = '0.0.1'
 templates_path = ['_templates']
 source_suffix = ".rst"

@@ -7,4 +7,3 @@ All notable changes to this project will be documented in this file. The format 
 - Initial release with basic database features++
 - Initial documentation++
 - Initial tests++
-- 
