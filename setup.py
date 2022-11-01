@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="python-db",
+    name="quickDB",
     version="0.0.1",
     author="Deepak Raj",
     author_email="deepak008@live.com",
