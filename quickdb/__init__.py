@@ -1,3 +1,3 @@
 from quickdb.main import QuickDB
-import argparse
 
+__all__ = ['QuickDB']

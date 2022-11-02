@@ -8,8 +8,8 @@ it's written in python, and is compatible with python 3.6 and above.</p>
 ## Features
 
 * Simple API
-* Colorful output
-* Easy to use
+* CLI support with colorful output
+* Easy to use 
 * CLI interface
 * Open source
 
