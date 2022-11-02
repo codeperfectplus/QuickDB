@@ -4,18 +4,19 @@ import json
 from colorama import Fore, Style
 
 
-def print_it(color, text):
-    if color == "red":
-        print(Fore.RED + text + Style.RESET_ALL)
-    elif color == "green":
-        print(Fore.GREEN + text + Style.RESET_ALL)
-    elif color == 'blue':
-        print(Fore.BLUE + text + Style.RESET_ALL)
+def print_it(color, text, print_it=True):
+    if print_it:
+        if color == "red":
+            print(Fore.RED + text + Style.RESET_ALL)
+        elif color == "green":
+            print(Fore.GREEN + text + Style.RESET_ALL)
+        elif color == 'blue':
+            print(Fore.BLUE + text + Style.RESET_ALL)
 
 
 class QuickDB(object):
     """  python database.py """
-    def __init__(self, db_path, overwrite_db=False):
+    def __init__(self, db_path, overwrite_db=False, print_it=True):
         self.db_path = db_path
         self.db = self.__init_db(overwrite_db)
 
