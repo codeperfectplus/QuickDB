@@ -1,4 +1,7 @@
 import unittest
+import sys
+
+sys.path.append(".")
 
 from quickdb.main import QuickDB
 
