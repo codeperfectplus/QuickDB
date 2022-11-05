@@ -17,3 +17,10 @@ Features
 -  CLI interface
 -  Open source
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+    installation.rst
+    as_command_line.rst
+    as_module.rst

@@ -1,4 +1,4 @@
-<h1 align="center"><a href="https://pypi.org/project/quickDatabase/">Quick DB ⚡ 0.0.1</a></h1>
+<h1 align="center"><a href="https://pypi.org/project/quickDatabase/">Quick DB ⚡ 0.0.2</a></h1>
 
 <p align="center">
 Light weight database for python, with a simple API and a simple file format.
