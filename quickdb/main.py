@@ -20,25 +20,24 @@ class QuickDB(object):
     def __init__(self, db_path, overwrite_db=False, debug=True):
         self.db_path = db_path
         self.debug = debug
-        self.db = self.__init_db(overwrite_db)
+        self.overwrite_db = overwrite_db
+        self.db = self.__init_db()
+        self.schema = None
+        self.primary_key = None
+        self.primary_value = None
 
     def __print(self, color, text):
         """ Print function to print colored text """
         if self.debug:
             print(colors_dict[color] + text + colors_dict['reset'])
 
-    def __load_db_from_file(self):
-        """ Load the database from the file """
-        with open(self.db_path, 'r') as f:
-            return json.load(f)
-
-    def __init_db(self, overwrite_db):
+    def __init_db(self):
         """" Initialize the database """
-        if not overwrite_db and os.path.exists(self.db_path):
+        if not self.overwrite_db and os.path.exists(self.db_path):
             self.__print("green", "Loading database from file")
             return self.__load_db_from_file()
 
-        elif overwrite_db and os.path.exists(self.db_path):
+        elif self.overwrite_db and os.path.exists(self.db_path):
             self.__print("blue", "Overwriting database")
             self.clear()
             return self.db
@@ -46,6 +45,19 @@ class QuickDB(object):
         elif not os.path.exists(self.db_path):
             self.__print("green", "Creating new database")
             return {}
+        
+    def create_schema(self, columns_list, primary_key):
+        """ Create the schema of the database """
+        self.schema = {
+            "columns": columns_list,
+            "primary_key": primary_key
+        }
+        self.primary_key = primary_key
+
+    def __load_db_from_file(self):
+        """ Load the database from the file """
+        with open(self.db_path, 'r') as f:
+            return json.load(f)
 
     def __dump_db(self, data):
         """ Dump the database to the file """
@@ -56,41 +68,23 @@ class QuickDB(object):
         except Exception:
             return False
 
-    def set(self, key, value, overwrite=False):
-        if key not in self.db:
-            self.__print("green", "Key is not present in the database, adding in the database")
+    def set(self, value, overwrite=False):
+        """ Set the key-value pair in the database """
+        primary_value = value[self.schema["columns"].index(self.primary_key)]
 
-            self.db[key] = value
-            self.__dump_db(self.db)
-            return True
-
-        elif not overwrite and key in self.db:
+        if primary_value in self.db and not overwrite:
             self.__print("red", "Key already exists")
             return False
-
-        elif overwrite and key in self.db:
-            self.__print("blue", "Key already exists, overwriting the value")
-            self.db[key] = value
-            self.__dump_db(self.db)
-            return True
-
-    def get(self, key):
-        if key in self.db:
-            return self.db[key]
-        else:
-            self.__print("red", "Key not found")
+        
+        if self.primary_key not in self.schema["columns"] or len(value) != len(self.schema["columns"]):
+            self.__print("red", "Invalid column name or number of columns")
             return False
 
-    def delete(self, key):
-        if key in self.db:
-            del self.db[key]
-            self.__dump_db(self.db)
-            self.__print("green", "Key deleted")
-        else:
-            self.__print("red", "Key not found")
+        self.db[primary_value] = dict(zip(self.schema["columns"], value))
+        self.__dump_db(self.db)
+        return True
 
     def get_db(self):
-        print(self.db)
         return self.db
 
     def clear(self):
