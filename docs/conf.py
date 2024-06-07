@@ -1,7 +1,7 @@
 from datetime import datetime
 
 project = 'quickDB'
-release = '0.0.1'
+release = '0.0.2'
 templates_path = ['_templates']
 source_suffix = ".rst"
 master_doc = "index"
