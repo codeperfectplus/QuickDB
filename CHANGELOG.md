@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file. The format 
 - Support for drop database added
 - Support for `select` , `insert`, `update` and `delete` queries added
 
-## [Initial Release]
+## [Initial Release] Version 0.0.1
 
 - Initial release with basic database features++
 - Initial documentation++
