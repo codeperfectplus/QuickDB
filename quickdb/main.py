@@ -132,7 +132,7 @@ class QuickDB(Logger):
         """ Get the primary key of the table """
         return self.schema[table_name]['primary_key']
 
-    def insert_into(self, table_name, value, overwrite=False, dump_db=False):
+    def insert_into(self, table_name, value, overwrite=False, commit=False):
         """ Set the key-value pair in the database """
         primary_value = value[self.schema[table_name]['primary_key_index']]
         columns_list = self.schema[table_name]['columns_list']
@@ -146,7 +146,26 @@ class QuickDB(Logger):
         self.db["database"][table_name][primary_value] = dict(zip(columns_list, value))
         self.logger.info(f"Inserted {value} into {table_name}")
 
-        if dump_db:
+        if commit:
+            self.dump_db()
+        return True
+    
+    def insert_into_many(self, table_name, values, overwrite=False, commit=False):
+        """ Set the key-value pair in the database """
+        for value in values:
+            primary_value = value[self.schema[table_name]['primary_key_index']]
+            columns_list = self.schema[table_name]['columns_list']
+
+            if primary_value in self.db['database'][table_name] and not overwrite:
+                return False
+
+            if len(value) != len(columns_list):
+                return False
+
+            self.db["database"][table_name][primary_value] = dict(zip(columns_list, value))
+            self.logger.info(f"Inserted {value} into {table_name}")
+
+        if commit:
             self.dump_db()
         return True
 
