@@ -130,3 +130,5 @@ dmypy.json
 *.json
 test_db.py
 test.py
+*.log
+quick_db_output/
