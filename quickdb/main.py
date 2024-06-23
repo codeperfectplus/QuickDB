@@ -33,6 +33,7 @@ class QuickDB(Logger):
         self.database = self.db['database']
         self.db_drop_path = db_drop_path
         self.db_log_path = db_log_path
+        self.logger.info("-"*50)
 
     def __load_db_from_file(self):
         """ Load the database from the file """
@@ -100,6 +101,10 @@ class QuickDB(Logger):
     def create_table(self, table_name, columns_list, primary_key=None):
         """ Create the schema of the database """
 
+        if table_name in self.schema:
+            self.logger.error(f"Table {table_name} already exists")
+            return False
+
         if primary_key not in columns_list:
             raise ValueError(f"Primary key {primary_key} not in columns list")
 
@@ -134,13 +139,17 @@ class QuickDB(Logger):
 
     def insert_into(self, table_name, value, overwrite=False, commit=False):
         """ Set the key-value pair in the database """
-        primary_value = value[self.schema[table_name]['primary_key_index']]
+        primary_value = str(value[self.schema[table_name]['primary_key_index']])
         columns_list = self.schema[table_name]['columns_list']
 
-        if primary_value in self.db['database'][table_name] and not overwrite:
+        database_keys = self.db['database'][table_name].keys()
+
+        if primary_value in database_keys and not overwrite:
+            self.logger.error(f"Primary key {primary_value} already exists in {table_name}")
             return False
 
         if len(value) != len(columns_list):
+            self.logger.error(f"Length of value {value} does not match columns list {columns_list}")
             return False
 
         self.db["database"][table_name][primary_value] = dict(zip(columns_list, value))
@@ -153,14 +162,16 @@ class QuickDB(Logger):
     def insert_into_many(self, table_name, values, overwrite=False, commit=False):
         """ Set the key-value pair in the database """
         for value in values:
-            primary_value = value[self.schema[table_name]['primary_key_index']]
+            primary_value = str(value[self.schema[table_name]['primary_key_index']])
             columns_list = self.schema[table_name]['columns_list']
 
-            if primary_value in self.db['database'][table_name] and not overwrite:
-                return False
+            if primary_value in self.db['database'][table_name].keys() and not overwrite:
+                self.logger.error(f"Primary key {primary_value} already exists in {table_name}")
+                continue
 
             if len(value) != len(columns_list):
-                return False
+                self.logger.error(f"Length of value {value} does not match columns list {columns_list}")
+                continue
 
             self.db["database"][table_name][primary_value] = dict(zip(columns_list, value))
             self.logger.info(f"Inserted {value} into {table_name}")
@@ -227,6 +238,3 @@ class QuickDB(Logger):
 
     def __str__(self):
         return f"QuickDB(db_path={self.db_path}, db={self.db})"
-
-    def __getitem__(self, key):
-        return self.db["database"][key] if key in self.db["database"] else None

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="quickDatabase",
-    version="0.0.4",
+    version="0.0.5",
     author="Deepak Raj",
     author_email="deepak008@live.com",
     description="Simple python database",

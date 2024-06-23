@@ -1,4 +1,4 @@
-<h1 align="center"><a href="https://pypi.org/project/quickDatabase/">Quick DB ⚡ 0.0.4</a></h1>
+<h1 align="center"><a href="https://pypi.org/project/quickDatabase/">Quick DB ⚡ 0.0.5</a></h1>
 
 <p align="center">
 Light weight database for python, with a simple API and a simple file format.
@@ -36,8 +36,16 @@ The documentation is available at [Quick DB](https://quickdb.readthedocs.io/en/l
 
 You can install the package using pip:
 
+### [Stable version](https://pypi.org/project/quickDatabase/)
+
 ```bash
 pip install quickdatabase
+```
+
+### [Unstable and latest version](https://test.pypi.org/project/quickDatabase/)
+
+```bash
+pip install -i https://test.pypi.org/simple/ quickDatabase
 ```
 
 ## Usage
@@ -62,9 +70,3 @@ This project is licensed under the MIT License - see the [LICENSE](/LICENSE) fil
 <a href="https://github.com/Py-Contributors/quickdb/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Py-Contributors/quickdb"/>
 </a>
-
-## Author
-
-- Module : QuickDB
-- Author  : py-contributors
-- Email   : pycontributors@gmail.com
