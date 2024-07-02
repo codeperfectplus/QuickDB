@@ -49,7 +49,7 @@ class QuickDB(Logger):
 
         if self.overwrite_db and os.path.exists(self.db_path):
             self.logger.info(f"Overwriting database from {self.db_path}")
-            self.clear()
+            self.clear_database()
             return self.db
 
         self.logger.info(f"Creating new database at {self.db_path}")
@@ -184,7 +184,11 @@ class QuickDB(Logger):
         """ Get the database along with the schema """
         return self.db
 
-    def clear(self):
+    def get_table_data(self, table_name):
+        """ Get the table data """
+        return self.db['database'][table_name]
+
+    def clear_database(self):
         """ Clear the database """
         self.db = {"database": {}, "schema": {}}
         self.dump_db()
